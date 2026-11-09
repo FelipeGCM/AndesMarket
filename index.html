@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Click&Ready de Andes Market: catálogo de productos, selección de tienda y experiencia de compra online."
+  />
+  <title>Andes Market | Click&Ready</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="mountain mountain-left"></span>
+          <span class="mountain mountain-center"></span>
+          <span class="mountain mountain-right"></span>
+        </div>
+
+        <div class="brand-text">
+          <h1>Andes Market</h1>
+          <p>Click&Ready</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button
+          id="openStoreSelectorBtn"
+          class="btn btn-secondary"
+          type="button"
+        >
+          Seleccionar tienda
+        </button>
+
+        <button
+          id="openLoginBtn"
+          class="btn btn-primary"
+          type="button"
+        >
+          Iniciar sesión
+        </button>
+
+        <button
+          id="openCartBtn"
+          class="btn btn-cart"
+          type="button"
+        >
+          Carrito
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <span class="eyebrow">
+            Piloto MVP · 3 tiendas en Santiago
+          </span>
+
+          <h2>
+            Compra online y retira en tienda con una experiencia simple y clara.
+          </h2>
+
+          <p>
+            Explora nuestro catálogo, selecciona tu tienda y consulta
+            la disponibilidad de los productos. Click&Ready facilita
+            tus compras en Andes Market.
+          </p>
+
+          <div class="hero-actions">
+            <button
+              id="heroStartBtn"
+              class="btn btn-primary"
+              type="button"
+            >
+              Comenzar compra
+            </button>
+
+            <button
+              id="heroStoreBtn"
+              class="btn btn-secondary"
+              type="button"
+            >
+              Ver tiendas
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="status-dot"></span>
+            <span>Estado del Sprint 1</span>
+          </div>
+
+          <ul class="status-list">
+            <li>
+              <strong>Listo:</strong>
+              API simulada, acceso de demostración y selección de tienda.
+            </li>
+            <li>
+              <strong>En certificación:</strong>
+              Búsqueda de productos.
+            </li>
+            <li>
+              <strong>En curso:</strong>
+              Carrito de compras.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="toolbar">
+        <div class="search-block">
+          <label for="searchInput">Buscar productos</label>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Ej: leche, arroz, fideos..."
+            autocomplete="off"
+          />
+
+          <div
+            id="searchSuggestions"
+            class="suggestions hidden"
+          ></div>
+        </div>
+
+        <div class="toolbar-meta">
+          <div class="selected-store-box">
+            <span class="meta-label">
+              Tienda seleccionada
+            </span>
+
+            <strong id="selectedStoreName">
+              Sin seleccionar
+            </strong>
+
+            <small id="selectedStoreAddress">
+              Selecciona una tienda para ver stock
+            </small>
+          </div>
+
+          <div class="store-stock-box">
+            <span class="meta-label">
+              Disponibilidad
+            </span>
+
+            <strong>Stock por tienda</strong>
+
+            <small>
+              Consulta las unidades disponibles en cada local.
+            </small>
+          </div>
+        </div>
+      </section>
+
+      <section class="catalog-section">
+        <div class="section-header">
+          <div>
+            <h3>Catálogo de productos</h3>
+
+            <p>
+              Encuentra productos para tu compra y revisa
+              su disponibilidad en la tienda seleccionada.
+            </p>
+          </div>
+
+          <div class="catalog-filters">
+            <button
+              class="chip active"
+              type="button"
+              data-filter="all"
+            >
+              Todos
+            </button>
+
+            <button
+              class="chip"
+              type="button"
+              data-filter="Lácteos"
+            >
+              Lácteos
+            </button>
+
+            <button
+              class="chip"
+              type="button"
+              data-filter="Despensa"
+            >
+              Despensa
+            </button>
+
+            <button
+              class="chip"
+              type="button"
+              data-filter="Bebidas"
+            >
+              Bebidas
+            </button>
+
+            <button
+              class="chip"
+              type="button"
+              data-filter="Aseo"
+            >
+              Aseo
+            </button>
+          </div>
+        </div>
+
+        <div id="productsGrid" class="products-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div
+    id="loginModal"
+    class="modal hidden"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-backdrop"
+      data-close="loginModal"
+    ></div>
+
+    <div class="modal-content">
+      <button
+        class="modal-close"
+        type="button"
+        data-close="loginModal"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
+
+      <div class="modal-header">
+        <h3>Iniciar sesión</h3>
+        <p>Accede con una cuenta de demostración.</p>
+      </div>
+
+      <form id="loginForm" class="form">
+        <div class="form-field">
+          <label for="email">
+            Correo electrónico
+          </label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="cliente@andesmarket.cl"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="password">
+            Contraseña
+          </label>
+
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary btn-full"
+        >
+          Ingresar
+        </button>
+      </form>
+
+      <div class="demo-note">
+        <strong>Cuenta de demostración</strong>
+        <p>
+          cliente@andesmarket.cl / Andes123
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="storeModal"
+    class="modal hidden"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-backdrop"
+      data-close="storeModal"
+    ></div>
+
+    <div class="modal-content modal-lg">
+      <button
+        class="modal-close"
+        type="button"
+        data-close="storeModal"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
+
+      <div class="modal-header">
+        <h3>Seleccionar tienda</h3>
+        <p>
+          Escoge una de las tres tiendas piloto de Santiago.
+        </p>
+      </div>
+
+      <div id="storesList" class="stores-list"></div>
+    </div>
+  </div>
+
+  <aside
+    id="cartDrawer"
+    class="cart-drawer hidden"
+    aria-hidden="true"
+  >
+    <div class="cart-header">
+      <div>
+        <h3>Carrito</h3>
+        <p>Funcionalidad en desarrollo</p>
+      </div>
+
+      <button
+        id="closeCartBtn"
+        class="modal-close"
+        type="button"
+        aria-label="Cerrar carrito"
+      >
+        ×
+      </button>
+    </div>
+
+    <div id="cartItems" class="cart-items">
+      <div class="empty-state">
+        <p>Tu carrito está vacío.</p>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span>Total</span>
+        <strong id="cartTotal">$0</strong>
+      </div>
+
+      <button
+        class="btn btn-secondary btn-full"
+        type="button"
+        disabled
+      >
+        Continuar (pendiente Sprint 2)
+      </button>
+
+      <small class="cart-note">
+        El checkout y la confirmación de pedidos
+        todavía no están disponibles.
+      </small>
+    </div>
+  </aside>
+
+  <div
+    id="toast"
+    class="toast hidden"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
